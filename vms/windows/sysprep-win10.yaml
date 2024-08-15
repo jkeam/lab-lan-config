@@ -189,8 +189,3 @@ kind: ConfigMap
 metadata:
   name: sysprep-win10
   namespace: vms
-  ownerReferences:
-  - apiVersion: kubevirt.io/v1
-    blockOwnerDeletion: false
-    kind: VirtualMachine
-    name: win10
