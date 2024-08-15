@@ -64,7 +64,7 @@ spec:
       spec:
         source:
           http:
-            url: 'http://httpd-server.cluster-services.svc.cluster.local:8080'
+            url: 'http://httpd-server.cluster-services.svc.cluster.local:8080/Win10_22H2_English_x64v1.iso'
         storage:
           resources:
             requests:
@@ -145,8 +145,7 @@ spec:
           smm: {}
         firmware:
           bootloader:
-            efi:
-              secureBoot: true
+            bios: {}
         machine:
           type: pc-q35-rhel9.4.0
         memory:
