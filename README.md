@@ -24,7 +24,7 @@ Use ArgoCD.
 ### Apps
 
 1. httpd-server - creates `httpd-server.cluster-services.svc.cluster.local`
-2. windows - creates windows10 vm, assumes `url: httpd-server.cluster-services.svc.cluster.local` exists from above
+2. vms/windows - creates windows10 vm, assumes `url: httpd-server.cluster-services.svc.cluster.local` exists from above
 
 ### Post Deployment
 
