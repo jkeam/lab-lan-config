@@ -30,7 +30,7 @@ spec:
       containers:
         - name: httpd-server
           image: >-
-            image-registry.openshift-image-registry.svc:5000/httpd-server/httpd-server:latest
+            image-registry.openshift-image-registry.svc:5000/cluster-services/httpd-server:latest
           ports:
             - containerPort: 8080
               protocol: TCP
