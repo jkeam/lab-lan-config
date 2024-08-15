@@ -2,6 +2,8 @@
 kind: VirtualMachine
 metadata:
   annotations:
+    kubevirt.io/latest-observed-api-version: v1
+    kubevirt.io/storage-observed-api-version: v1
     vm.kubevirt.io/validations: |
       [
         {
@@ -34,20 +36,31 @@ metadata:
           "values": ["sata"]
         }
       ]
+  name: win10
+  namespace: vms
   labels:
     app: win10
     vm.kubevirt.io/template: windows10-desktop-medium
     vm.kubevirt.io/template.namespace: openshift
     vm.kubevirt.io/template.revision: '1'
     vm.kubevirt.io/template.version: v0.29.1
-  name: win10
-  namespace: vms
 spec:
   dataVolumeTemplates:
     - apiVersion: cdi.kubevirt.io/v1beta1
       kind: DataVolume
       metadata:
+        annotations:
+          cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
         name: win10
+      spec:
+        source:
+          blank: {}
+        storage:
+          resources:
+            requests:
+              storage: 40Gi
+    - metadata:
+        name: win10-installation-cdrom
       spec:
         source:
           http:
@@ -55,7 +68,7 @@ spec:
         storage:
           resources:
             requests:
-              storage: 50Gi
+              storage: 20Gi
   running: true
   template:
     metadata:
@@ -66,6 +79,7 @@ spec:
       labels:
         kubevirt.io/domain: win10
         kubevirt.io/size: medium
+        network.kubevirt.io/headlessService: headless
     spec:
       architecture: amd64
       domain:
@@ -85,12 +99,18 @@ spec:
           threads: 1
         devices:
           disks:
-            - disk:
+            - bootOrder: 2
+              disk:
                 bus: sata
               name: rootdisk
-            - cdrom:
+            - bootOrder: 3
+              cdrom:
                 bus: sata
               name: windows-drivers-disk
+            - bootOrder: 1
+              cdrom:
+                bus: sata
+              name: installation-cdrom
             - cdrom:
                 bus: sata
               name: sysprep
@@ -99,28 +119,29 @@ spec:
               name: tablet
               type: tablet
           interfaces:
-            - macAddress: '02:01:b9:00:00:00'
+            - macAddress: '02:01:b9:00:00:02'
               masquerade: {}
               model: e1000e
               name: default
+          logSerialConsole: false
         features:
           acpi: {}
           apic: {}
           hyperv:
-            frequencies: {}
-            ipi: {}
             reenlightenment: {}
-            relaxed: {}
-            reset: {}
-            runtime: {}
-            spinlocks:
-              spinlocks: 8191
+            ipi: {}
             synic: {}
             synictimer:
               direct: {}
-            tlbflush: {}
-            vapic: {}
+            spinlocks:
+              spinlocks: 8191
+            reset: {}
+            relaxed: {}
             vpindex: {}
+            runtime: {}
+            tlbflush: {}
+            frequencies: {}
+            vapic: {}
           smm: {}
         firmware:
           bootloader:
@@ -142,6 +163,9 @@ spec:
         - containerDisk:
             image: 'registry.redhat.io/container-native-virtualization/virtio-win-rhel9@sha256:584857c3d7cee20877a4ea135fb58fd7721dfc04a23a6c76580eba9facd6e6c0'
           name: windows-drivers-disk
+        - dataVolume:
+            name: win10-installation-cdrom
+          name: installation-cdrom
         - name: sysprep
           sysprep:
             configMap:
