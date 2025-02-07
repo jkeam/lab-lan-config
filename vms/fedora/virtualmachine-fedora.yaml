@@ -35,7 +35,7 @@ spec:
         storage:
           resources:
             requests:
-              storage: 30Gi
+              storage: 40Gi
   running: true
   template:
     metadata:
@@ -53,12 +53,12 @@ spec:
               noCloud: {}
             source:
               secret:
-                secretName: ada-ssh-key
+                secretName: jobs-ssh-key
       architecture: amd64
       domain:
         cpu:
           cores: 1
-          sockets: 1
+          sockets: 2
           threads: 1
         devices:
           disks:
