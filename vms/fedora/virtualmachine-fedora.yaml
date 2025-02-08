@@ -104,6 +104,9 @@ spec:
               package_upgrade: true
               timezone: 'America/New_York'
               hostname: fedora
+              packages:
+              - x11vnc
+              - net-tools
               write_files:
               - content: |
                   /usr/bin/xfce4-session
@@ -118,7 +121,8 @@ spec:
                 owner: 'root:root'
                 defer: false
               - content: |
-                  nohup startx > ./startx-nohup 2>&1 &
+                  #!/bin/bash
+                  nohup startx > /home/fedora/startx-nohup 2>&1 &
                 path: /home/fedora/startwm.sh
                 permissions: '0744'
                 owner: 'fedora:fedora'
