@@ -109,16 +109,20 @@ spec:
                   /usr/bin/xfce4-session
                 path: /home/fedora/.xinitrc
                 permissions: '0744'
+                owner: 'fedora:fedora'
+                defer: true
               - content: |
                   allowed_users = anybody
                 path: /etc/X11/Xwrapper.config
                 permissions: '0744'
+                owner: 'root:root'
+                defer: false
               - content: |
-                  allowed_users = anybody
                   nohup startx > ./startx-nohup 2>&1 &
                 path: /home/fedora/startwm.sh
                 permissions: '0744'
+                owner: 'fedora:fedora'
+                defer: true
               runcmd:
               - dnf group install xfce-desktop -y
-              - chown -R fedora /home/fedora
           name: cloudinitdisk
