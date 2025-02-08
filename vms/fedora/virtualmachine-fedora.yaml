@@ -107,6 +107,7 @@ spec:
               packages:
               - x11vnc
               - net-tools
+              - chromium
               write_files:
               - content: |
                   /usr/bin/xfce4-session
