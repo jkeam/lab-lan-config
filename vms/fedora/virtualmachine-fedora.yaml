@@ -104,8 +104,6 @@ spec:
               package_upgrade: true
               timezone: 'America/New_York'
               hostname: fedora
-              package:
-                - xfce-desktop
               write_files:
               - content: |
                   /usr/bin/xfce4-session
@@ -120,4 +118,6 @@ spec:
                   nohup startx > ./startx-nohup 2>&1 &
                 path: /home/fedora/startwm.sh
                 permissions: '0744'
+              runcmd:
+              - dnf group install xfce-desktop -y
           name: cloudinitdisk
