@@ -100,4 +100,14 @@ spec:
               user: fedora
               password: axqa-jtsr-isq2
               chpasswd: { expire: False }
+            package_update: true
+            package_upgrade: true
+            timezone: 'America/New_York'
+            hostname: fedora
+            package:
+              - xfce-desktop
+            runcmd:
+              - echo '/usr/bin/xfce4-session' > ~/.xinitrc
+              - echo 'allowed_users = anybody' > /etc/X11/Xwrapper.config
+              - echo 'nohup startx > ./startx-nohup 2>&1 &' > /usr/local/bin/startwm.sh
           name: cloudinitdisk
