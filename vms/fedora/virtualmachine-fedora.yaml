@@ -120,4 +120,5 @@ spec:
                 permissions: '0744'
               runcmd:
               - dnf group install xfce-desktop -y
+              - chown -R fedora /home/fedora
           name: cloudinitdisk
