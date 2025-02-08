@@ -106,8 +106,18 @@ spec:
               hostname: fedora
               package:
                 - xfce-desktop
-              runcmd:
-                - echo '/usr/bin/xfce4-session' > ~/.xinitrc
-                - echo 'allowed_users = anybody' > /etc/X11/Xwrapper.config
-                - echo 'nohup startx > ./startx-nohup 2>&1 &' > /usr/local/bin/startwm.sh
+              write_files:
+              - content: |
+                  /usr/bin/xfce4-session
+                path: /home/fedora/.xinitrc
+                permissions: '0744'
+              - content: |
+                  allowed_users = anybody
+                path: /etc/X11/Xwrapper.config
+                permissions: '0744'
+              - content: |
+                  allowed_users = anybody
+                  nohup startx > ./startx-nohup 2>&1 &
+                path: /home/fedora/startwm.sh
+                permissions: '0744'
           name: cloudinitdisk
