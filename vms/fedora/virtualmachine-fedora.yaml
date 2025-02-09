@@ -73,6 +73,10 @@ spec:
               masquerade: {}
               model: virtio
               name: default
+            - macAddress: '02:01:b9:00:00:0c'
+              bridge: {}
+              model: virtio
+              name: bridge
           rng: {}
         features:
           acpi: {}
@@ -89,6 +93,9 @@ spec:
       networks:
         - name: default
           pod: {}
+        - name: bridge
+          multus:
+            networkName: br-ex-network
       terminationGracePeriodSeconds: 180
       volumes:
         - dataVolume:
