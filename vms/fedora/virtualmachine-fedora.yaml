@@ -133,7 +133,7 @@ spec:
                 defer: false
               - content: |
                   #!/bin/bash
-                  nohup startx > /home/fedora/startx-nohup.log 2>&1 &
+                  nohup startx > ./startx-nohup.log 2>&1 &
                 path: /home/fedora/startwm.sh
                 permissions: '0744'
                 owner: 'fedora:fedora'
