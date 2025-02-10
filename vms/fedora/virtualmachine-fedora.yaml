@@ -53,7 +53,7 @@ spec:
               noCloud: {}
             source:
               secret:
-                secretName: ada-ssh-key
+                secretName: jobs-ssh-key
       architecture: amd64
       domain:
         cpu:
