@@ -157,5 +157,6 @@ spec:
               - cp /home/fedora/dev/projects/dotfiles/.vimrc /home/fedora/.config/nvim
               - curl -fsSL -o /home/fedora/install-ohmyzshell.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
               - chown fedora:fedora -R /home/fedora
+              - chmod 777 /home/fedora/install-ohmyzshell.sh
               - su -c "/home/fedora/install-ohmyzshell.sh" fedora
           name: cloudinitdisk
