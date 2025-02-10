@@ -25,6 +25,7 @@ Use ArgoCD.
 
 1. httpd-server - creates `httpd-server.cluster-services.svc.cluster.local`
 2. vms/windows - creates windows10 vm, assumes `url: httpd-server.cluster-services.svc.cluster.local` exists from above
+3. vms/fedora - create fedora vm. update `sudo vi /etc/passwd` to use `/bin/zsh` as default shell
 
 ### Post Deployment
 
