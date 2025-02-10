@@ -155,9 +155,10 @@ spec:
               - git clone https://github.com/jkeam/dotfiles /home/fedora/dev/projects/dotfiles
               - cp /home/fedora/dev/projects/dotfiles/.vimrc /home/fedora
               - mkdir -p /home/fedora/.config/nvim
-              - cp /home/fedora/dev/projects/dotfiles/.vimrc /home/fedora/.config/nvim
+              - cp /home/fedora/dev/projects/dotfiles/.vimrc /home/fedora/.config/nvim/init.vim
               - curl -fsSL -o /home/fedora/install-ohmyzshell.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
               - chown fedora:fedora -R /home/fedora
               - chmod 777 /home/fedora/install-ohmyzshell.sh
               - su -c "/home/fedora/install-ohmyzshell.sh" fedora
+              - su -c "echo 'export TERM=vt100' >> /home/fedora/.zshrc" fedora
           name: cloudinitdisk
