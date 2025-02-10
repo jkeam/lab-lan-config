@@ -161,4 +161,5 @@ spec:
               - chmod 777 /home/fedora/install-ohmyzshell.sh
               - su -c "/home/fedora/install-ohmyzshell.sh" fedora
               - su -c "echo 'export TERM=vt100' >> /home/fedora/.zshrc" fedora
+              - rm /home/fedora/install-ohmyzshell.sh
           name: cloudinitdisk
