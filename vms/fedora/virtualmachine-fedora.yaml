@@ -150,6 +150,12 @@ spec:
               - firewall-cmd --reload
               - curl -fLo /home/fedora/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
               - curl -fLo /home/fedora/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-              - mkdir -p /home/fedora/dev/projects
+              - mkdir -p /home/fedora/dev/projects/dotfiles
+              - git clone https://github.com/jkeam/dotfiles /home/fedora/dev/projects/dotfiles
+              - cp /home/fedora/dev/projects/dotfiles/.vimrc /home/fedora
+              - mkdir -p /home/fedora/.config/nvim
+              - cp /home/fedora/dev/projects/dotfiles/.vimrc /home/fedora/.config/nvim
+              - curl -fsSL -o /home/fedora/install-ohmyzshell.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
               - chown fedora:fedora -R /home/fedora
+              - su -c "/home/fedora/install-ohmyzshell.sh" fedora
           name: cloudinitdisk
