@@ -40,6 +40,7 @@ metadata:
   namespace: vms
   labels:
     app: win10
+    vm.kubevirt.io/name: win10
     vm.kubevirt.io/template: windows10-desktop-medium
     vm.kubevirt.io/template.namespace: openshift
     vm.kubevirt.io/template.revision: '1'

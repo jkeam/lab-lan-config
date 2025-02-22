@@ -7,7 +7,7 @@ metadata:
     metallb.universe.tf/address-pool: windows-ip-addresspool
 spec:
   selector:
-    app: win10
+    kubevirt.io/domain: win10
   ports:
   - name: rdp
     port: 3389
