@@ -176,6 +176,21 @@ data:
                         </SynchronousCommand>
                         <SynchronousCommand wcm:action="add">
                             <Order>5</Order>
+                            <Description>Set Static IP Address</Description>
+                            <CommandLine>netsh interface ip set address name="Ethernet Instance 0" static 192.168.1.204 255.255.255.0 192.168.1.1</CommandLine>
+                        </SynchronousCommand>
+                        <SynchronousCommand wcm:action="add">
+                            <Order>6</Order>
+                            <Description>Set First DNS</Description>
+                            <CommandLine>netsh interface ip set dnsservers "Ethernet Instance 0" static 192.168.1.201 primary</CommandLine>
+                        </SynchronousCommand>
+                        <SynchronousCommand wcm:action="add">
+                            <Order>7</Order>
+                            <Description>Set Second DNS</Description>
+                            <CommandLine>netsh interface ip add dnsservers "Ethernet Instance 0" 1.1.1.1</CommandLine>
+                        </SynchronousCommand>
+                        <SynchronousCommand wcm:action="add">
+                            <Order>8</Order>
                             <RequiresUserInput>false</RequiresUserInput>
                             <CommandLine>cmd /c shutdown /s /f /t 10</CommandLine>
                             <Description>Shuts down the system</Description>

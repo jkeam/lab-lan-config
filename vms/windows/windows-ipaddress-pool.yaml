@@ -1,0 +1,12 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: windows-ip-addresspool
+  namespace: metallb-system
+  resourceVersion: '213954657'
+  uid: 7997dbad-f019-4517-8600-18fc25943a29
+spec:
+  addresses:
+  - 192.168.1.204/24
+  autoAssign: true
+  avoidBuggyIPs: true
