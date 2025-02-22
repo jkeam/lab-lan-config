@@ -4,4 +4,3 @@ namespace: vms
 resources:
   - nncp.yaml
   - nad.yaml
-  - metallb-ipaddress-pool.yaml
