@@ -155,6 +155,9 @@ spec:
       networks:
         - name: default
           pod: {}
+        - name: bridge
+          multus:
+            networkName: br-ex-network
       terminationGracePeriodSeconds: 3600
       volumes:
         - dataVolume:
