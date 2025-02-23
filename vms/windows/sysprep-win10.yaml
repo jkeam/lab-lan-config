@@ -188,4 +188,3 @@ data:
 kind: ConfigMap
 metadata:
   name: sysprep-win10
-  namespace: vms

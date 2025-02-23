@@ -37,7 +37,6 @@ metadata:
         }
       ]
   name: win10
-  namespace: vms
   labels:
     app: win10
     vm.kubevirt.io/name: win10

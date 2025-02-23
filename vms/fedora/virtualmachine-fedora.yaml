@@ -20,7 +20,6 @@ metadata:
     vm.kubevirt.io/template.revision: '1'
     vm.kubevirt.io/template.version: v0.29.1
   name: fedora
-  namespace: vms
 spec:
   dataVolumeTemplates:
     - apiVersion: cdi.kubevirt.io/v1beta1
