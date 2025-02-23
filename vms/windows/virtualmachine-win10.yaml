@@ -124,7 +124,7 @@ spec:
               model: virtio
               macAddress: '02:01:b9:00:00:02'
               masquerade: {}
-            - mame: bridge
+            - name: bridge
               model: virtio
               macAddress: '02:01:b9:00:00:07'
               bridge: {}
