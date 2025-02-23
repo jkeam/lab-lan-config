@@ -124,6 +124,10 @@ spec:
               masquerade: {}
               model: e1000e
               name: default
+            - macAddress: '02:01:b9:00:00:07'
+              bridge: {}
+              model: e1000e
+              name: bridge
           logSerialConsole: false
         features:
           acpi: {}
