@@ -1,0 +1,11 @@
+[Unit]
+Description=Pi-Hole Podman Container
+After=firewalld.service
+
+[Service]
+ExecStart=/usr/bin/podman run --name pihole -p 7053:53/tcp -p 7053:53/udp -p 7067:67/udp -p 7080:80/tcp -v /home/jkeam/dev/projects/pi-hole/podman/dnsmasq:/etc/pihole -v /home/jkeam/dev/projects/pi-hole/podman/pihole:/etc/dnsmasq.d -e TZ="America/New_York" -e WEBPASSWORD="password" -e FTLCONF_LOCAL_IPV4="192.168.1.201" -e DHCP_ACTIVE=true -e DHCP_START="192.168.1.202" -e DHCP_END="192.168.1.254" -e DHCP_ROUTER="192.168.1.1" -e DHCP_rapid_commit=true --hostname pi -e VIRTUAL_HOST="pi" -e PROXY_LOCATION="pi" -e INTERFACE="tap0" --security-opt label=disable --cap-add=NET_ADMIN --cap-add=NET_RAW --cap-add=CAP_AUDIT_WRITE --net=slirp4netns:port_handler=slirp4netns --dns=127.0.0.1 --dns=1.1.1.1 --restart=always docker.io/pihole/pihole:latest
+ExecStop=/usr/bin/podman stop -t 2 pihole
+ExecStopPost=/usr/bin/podman rm pihole
+
+[Install]
+WantedBy=multi-user.target
