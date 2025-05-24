@@ -1,0 +1,102 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: all-build-configs-role
+  namespace: cluster-services
+rules:
+- apiGroups: ["build.openshift.io"]
+  resources: ["buildconfigs"]
+  verbs: ["*"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: all-build-configs-argocd-binding
+  namespace: cluster-services
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: all-build-configs-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: all-imagestreams-role
+  namespace: cluster-services
+rules:
+- apiGroups: ["image.openshift.io"]
+  resources: ["imagestreams"]
+  verbs: ["*"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: all-imagestreams-argocd-binding
+  namespace: cluster-services
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: all-imagestreams-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: all-basic-role
+  namespace: cluster-services
+rules:
+- apiGroups: [""]
+  resources: ["serviceaccounts", "services"]
+  verbs: ["*"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: all-basic-argocd-binding
+  namespace: cluster-services
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: all-basic-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: all-deployment-role
+  namespace: cluster-services
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["*"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: all-deployment-argocd-binding
+  namespace: cluster-services
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: all-deployment-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
