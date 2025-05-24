@@ -71,18 +71,26 @@ Everything will be installed via GitOps.
 
 ### Apps
 
-1. httpd-server - creates `httpd-server.cluster-services.svc.cluster.local`
-2. vms/windows - creates windows10 vm, assumes `url: httpd-server.cluster-services.svc.cluster.local` exists from above
-3. vms/fedora - create fedora vm. update `sudo vi /etc/passwd` to use `/bin/zsh` as default shell
+#### Cluster Services
 
-### Post Deployment
+1. Create rbac oc apply -f ./rbac/httpd-server.yaml
+2. Apply github.com/jkeam/lab-lan-gitops/http-app.yaml. That uses this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`
 
-```shell
-ISO_FILE=$HOME/win2k19.iso
-POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
-oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
-oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
-```
+#### Windows
+
+1. Download Windows ISO
+2. Upload ISO
+    ```shell
+    ISO_FILE=$HOME/win2k19.iso  # or whatever you named your iso
+    POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
+    oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
+    oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
+    ```
+3. Apply github.com/jkeam/lab-lan-gitops/windows10.yaml. That uses this `vms/windows` dir to create `httpd-server.cluster-services.svc.cluster.local`
+
+#### Other
+
+1. vms/fedora - create fedora vm. update `sudo vi /etc/passwd` to use `/bin/zsh` as default shell
 
 ## References
 
