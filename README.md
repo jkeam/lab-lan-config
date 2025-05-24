@@ -54,6 +54,10 @@ oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patc
 oc get pod -n openshift-image-registry -l docker-registry=default
 ```
 
+## Virtualization
+
+Install OpenShift Virtualization operator and create `HyperConvered` object using all defaults.
+
 ## Deployment
 
 Everything will be installed via GitOps.
@@ -66,8 +70,6 @@ Everything will be installed via GitOps.
     ```
 
 ### Apps
-
-Install OpenShift Virtualization operator.
 
 1. httpd-server - creates `httpd-server.cluster-services.svc.cluster.local`
 2. vms/windows - creates windows10 vm, assumes `url: httpd-server.cluster-services.svc.cluster.local` exists from above
