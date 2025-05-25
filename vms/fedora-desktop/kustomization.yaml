@@ -2,6 +2,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: vms
 resources:
-  - ssh-pub-key.yaml
-  - cloudinitsecret.yaml
-  - virtualmachine-fedora.yaml
+  - virtualmachine-fedora-lxde.yaml

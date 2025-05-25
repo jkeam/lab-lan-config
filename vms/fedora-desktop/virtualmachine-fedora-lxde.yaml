@@ -1,0 +1,104 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: fedora-lxde
+  namespace: vms
+  labels:
+    app: fedora-lxde
+    kubevirt.io/dynamic-credentials-support: 'true'
+    vm.kubevirt.io/template: fedora-server-small
+    vm.kubevirt.io/template.namespace: openshift
+    vm.kubevirt.io/template.revision: '1'
+    vm.kubevirt.io/template.version: v0.32.2
+spec:
+  dataVolumeTemplates:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        annotations:
+          cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        creationTimestamp: null
+        name: fedora-lxde
+      spec:
+        source:
+          blank: {}
+        storage:
+          resources:
+            requests:
+              storage: 40Gi
+    - metadata:
+        creationTimestamp: null
+        name: fedora-lxde-installation-cdrom
+      spec:
+        source:
+          http:
+            url: 'http://httpd-server.cluster-services.svc.cluster.local:8080/Fedora-LXDE-Live-x86_64-42-1.1.iso'
+        storage:
+          resources:
+            requests:
+              storage: 20Gi
+  runStrategy: RerunOnFailure
+  template:
+    metadata:
+      annotations:
+        vm.kubevirt.io/flavor: small
+        vm.kubevirt.io/os: fedora
+        vm.kubevirt.io/workload: desktop
+      creationTimestamp: null
+      labels:
+        kubevirt.io/domain: fedora-lxde
+        kubevirt.io/size: small
+        network.kubevirt.io/headlessService: headless
+    spec:
+      architecture: amd64
+      domain:
+        cpu:
+          cores: 1
+          sockets: 2
+          threads: 1
+        devices:
+          disks:
+            - bootOrder: 2
+              disk:
+                bus: virtio
+              name: rootdisk
+            - bootOrder: 1
+              cdrom:
+                bus: sata
+              name: installation-cdrom
+          interfaces:
+            - macAddress: '02:54:ba:00:00:06'
+              masquerade: {}
+              model: virtio
+              name: default
+            - bridge: {}
+              macAddress: '02:54:ba:00:00:07'
+              model: virtio
+              name: bridge
+          rng: {}
+        features:
+          acpi: {}
+          smm:
+            enabled: true
+        firmware:
+          bootloader:
+            bios: {}
+        machine:
+          type: pc-q35-rhel9.4.0
+        memory:
+          guest: 8Gi
+        resources: {}
+      networks:
+        - name: default
+          pod: {}
+        - multus:
+            networkName: br-ex-network
+          name: bridge
+      terminationGracePeriodSeconds: 180
+      volumes:
+        - dataVolume:
+            name: fedora-lxde
+          name: rootdisk
+        - dataVolume:
+            name: fedora-lxde-installation-cdrom
+          name: installation-cdrom
