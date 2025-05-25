@@ -1,6 +1,6 @@
 # Lab Lan Config
 
-Homelab Gitops Config Repo
+Homelab Gitops Config Repo.
 
 ## User
 
@@ -25,7 +25,7 @@ oc get pods -n openshift-authentication -w
 
 ## Storage
 
-Will be using local storage via LVM.
+Will use local storage via LVM.
 
 1. Install LVM Storage Operator
 2. Create LVM Cluster
@@ -58,7 +58,13 @@ oc get pod -n openshift-image-registry -l docker-registry=default
 
 Install OpenShift Virtualization operator and create `HyperConvered` object using all defaults.
 
-## Deployment
+Also create the project where all VMs and configs will live.
+
+```shell
+oc new-project vms
+```
+
+### Deployment
 
 Everything will be installed via GitOps.
 
@@ -69,28 +75,64 @@ Everything will be installed via GitOps.
     oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
     ```
 
-### Apps
+### Network
 
-#### Cluster Services
+Install the NMState operator and NMState operand.
 
-1. Create rbac oc apply -f ./rbac/httpd-server.yaml
-2. Apply github.com/jkeam/lab-lan-gitops/http-app.yaml. That uses this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`
+```shell
+# create localnet
+oc apply -k ./network
+```
 
-#### Windows
+### Cluster Services
+
+1. Create rbac via `oc apply -f ./rbac/httpd-server.yaml`
+2. Apply github.com/jkeam/lab-lan-gitops/http-app.yaml. That uses this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`.
+
+## VMs
+
+### Windows
 
 1. Download Windows ISO
 2. Upload ISO
     ```shell
-    ISO_FILE=$HOME/win2k19.iso  # or whatever you named your iso
+    ISO_FILE=$HOME/Downloads/Win10_22H2_English_x64v1.iso  # or wherever it is
     POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
     oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
     oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
     ```
-3. Apply github.com/jkeam/lab-lan-gitops/windows10.yaml. That uses this `vms/windows` dir to create `httpd-server.cluster-services.svc.cluster.local`
+3. Apply github.com/jkeam/lab-lan-gitops/windows10.yaml. That uses this `vms/windows` dir.
 
-#### Other
+### Fedora Desktop
 
-1. vms/fedora - create fedora vm. update `sudo vi /etc/passwd` to use `/bin/zsh` as default shell
+This is using a live disk.
+
+1. Download Fedora ISO. I am using the LXDE Spin.
+2. Upload ISO
+    ```shell
+    ISO_FILE=$HOME/Downloads/Fedora-LXDE-Live-x86_64-42-1.1.iso  # or wherever it is
+    POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
+    oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
+    oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
+    ```
+3. Log in and install the OS
+4. Shutdown OS
+5. Change boot order so that disk is before cd-rom
+6. Start up machine again
+
+To connect:
+
+```shell
+# ensure remote-viewer is installed
+# ensure virtctl is installed and in path
+virtctl vnc fedora-lxde
+```
+
+### Fedora Server
+
+Use Fedora Server source already available in OpenShift. Installs xfce desktop environment on top.
+
+1. Apply github.com/jkeam/lab-lan-gitops/fedora.yaml. That uses this `vms/fedora` dir.
 
 ## References
 
