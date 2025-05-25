@@ -58,10 +58,11 @@ oc get pod -n openshift-image-registry -l docker-registry=default
 
 Install OpenShift Virtualization operator and create `HyperConvered` object using all defaults.
 
-Also create the project where all VMs and configs will live.
+Also create the project where all VMs and configs will live and create the right RBAC.
 
 ```shell
 oc new-project vms
+oc apply -f ./rbac/vms.yaml
 ```
 
 ### Deployment
