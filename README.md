@@ -73,6 +73,7 @@ Everything will be installed via GitOps.
 2. Get password with
 
     ```shell
+    # username is admin
     oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-
     ```
 
