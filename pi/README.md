@@ -1,5 +1,7 @@
 # PI
 
+## Pihole
+
 ```shell
 # setup
 mkdir -p /home/jkeam/dev/projects/pi-hole/podman/dnsmasq
@@ -15,5 +17,12 @@ sudo firewall-cmd --zone=FedoraServer --add-forward-port=port=80:proto=udp:topor
 sudo firewall-cmd --reload
 
 # start
-sudo systemctl start pihole.service
+sudo systemctl enable --now pihole.service
+```
+
+## Tailscale
+
+```shell
+sudo cp ./tailscaled.service /usr/lib/systemd/system
+sudo systemctl enable --now tailscaled.service
 ```
