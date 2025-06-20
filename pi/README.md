@@ -23,6 +23,7 @@ sudo systemctl enable --now pihole.service
 ## Tailscale
 
 ```shell
+sudo dnf install -y tailscale
 sudo cp ./tailscaled.service /usr/lib/systemd/system
 sudo systemctl enable --now tailscaled.service
 ```
