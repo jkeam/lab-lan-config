@@ -5,3 +5,4 @@ metadata:
 spec:
   connectionConfig:
     url: 'https://keamchart.com'
+  name: Keam Helm Charts
