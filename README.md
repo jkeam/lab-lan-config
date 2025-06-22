@@ -136,6 +136,13 @@ Use Fedora Server source already available in OpenShift. Installs xfce desktop e
 
 1. Apply github.com/jkeam/lab-lan-gitops/fedora.yaml. That uses this `vms/fedora` dir.
 
+## Apps
+
+```shell
+oc apply -f ./rbac/apps.yaml
+# Apply `github.com/jkeam/lab-lan-gitops/apps`
+```
+
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)
