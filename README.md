@@ -132,15 +132,19 @@ virtctl vnc fedora-lxde
 
 ### Fedora Server
 
-Use Fedora Server source already available in OpenShift. Installs xfce desktop environment on top.
+Use Fedora Server source already available in OpenShift.
+Installs xfce desktop environment on top.
 
-1. Apply github.com/jkeam/lab-lan-gitops/fedora.yaml. That uses this `vms/fedora` dir.
+```shell
+# uses `vms/fedora` dir
+oc apply -f github.com/jkeam/lab-lan-gitops/fedora.yaml.
+```
 
 ## Apps
 
 ```shell
 oc apply -f ./rbac/apps.yaml
-# Apply `github.com/jkeam/lab-lan-gitops/apps`
+# oc apply -f github.com/jkeam/lab-lan-gitops/hello-go.yaml
 ```
 
 ## References
