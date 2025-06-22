@@ -1,0 +1,7 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: 'keamchart'
+spec:
+  connectionConfig:
+    url: 'https://keamchart.com'
