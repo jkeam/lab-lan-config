@@ -142,6 +142,8 @@ oc apply -f github.com/jkeam/lab-lan-gitops/fedora.yaml.
 
 ## Apps
 
+### Hello Go
+
 ```shell
 oc apply -f ./rbac/apps.yaml
 # oc apply -f github.com/jkeam/lab-lan-gitops/hello-go.yaml
