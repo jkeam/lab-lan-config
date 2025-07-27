@@ -57,8 +57,8 @@ spec:
       domain:
         cpu:
           cores: 1
-          sockets: 2
-          threads: 1
+          sockets: 1
+          threads: 2
         devices:
           disks:
             - disk:
