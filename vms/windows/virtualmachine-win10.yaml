@@ -58,7 +58,7 @@ spec:
         storage:
           resources:
             requests:
-              storage: 40Gi
+              storage: 60Gi
     - metadata:
         name: win10-installation-cdrom
       spec:
@@ -96,7 +96,7 @@ spec:
         cpu:
           cores: 1
           sockets: 1
-          threads: 1
+          threads: 2
         devices:
           disks:
             - bootOrder: 2
@@ -153,7 +153,7 @@ spec:
         machine:
           type: pc-q35-rhel9.4.0
         memory:
-          guest: 4Gi
+          guest: 8Gi
         resources: {}
       networks:
         - name: default
