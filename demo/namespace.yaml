@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+  labels:
+    name: demo
+  annotations:
+    openshift.io/description: Demo
+    openshift.io/display-name: demo

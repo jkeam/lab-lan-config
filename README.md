@@ -56,9 +56,11 @@ oc get pod -n openshift-image-registry -l docker-registry=default
 
 ## Virtualization
 
-Install OpenShift Virtualization operator and create `HyperConvered` object using all defaults.
+Install OpenShift Virtualization operator and create `HyperConvered` object
+using all defaults.
 
-Also create the project where all VMs and configs will live and create the right RBAC.
+Also create the project where all VMs and configs will live and
+create the right RBAC.
 
 ```shell
 oc new-project vms
@@ -89,7 +91,8 @@ oc apply -k ./network
 ### Cluster Services
 
 1. Create rbac via `oc apply -f ./rbac/httpd-server.yaml`
-2. Apply github.com/jkeam/lab-lan-gitops/http-app.yaml. That uses this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`.
+2. Apply github.com/jkeam/lab-lan-gitops/http-app.yaml. That uses
+this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`.
 
 ## VMs
 
@@ -97,12 +100,14 @@ oc apply -k ./network
 
 1. Download Windows ISO
 2. Upload ISO
+
     ```shell
     ISO_FILE=$HOME/Downloads/Win10_22H2_English_x64v1.iso  # or wherever it is
     POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
     oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
     oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
     ```
+
 3. Apply github.com/jkeam/lab-lan-gitops/windows10.yaml. That uses this `vms/windows` dir.
 
 ### Fedora Desktop
@@ -111,12 +116,14 @@ This is using a live disk.
 
 1. Download Fedora ISO. I am using the LXDE Spin.
 2. Upload ISO
+
     ```shell
-    ISO_FILE=$HOME/Downloads/Fedora-LXDE-Live-x86_64-42-1.1.iso  # or wherever it is
+    ISO_FILE=$HOME/Downloads/Fedora-LXDE-Live-x86_64-42-1.1.iso  # or wherever
     POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
     oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
     oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
     ```
+
 3. Log in and install the OS
 4. Shutdown OS
 5. Change boot order so that disk is before cd-rom
@@ -152,3 +159,11 @@ oc apply -f ./rbac/apps.yaml
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)
+
+## Demo
+
+To create a demo environment to do things, spin it up:
+
+```shell
+oc apply -k ./demo
+```
