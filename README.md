@@ -108,7 +108,9 @@ this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.loc
     oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
     ```
 
-3. Apply [https://github.com/jkeam/lab-lan-gitops/windows10.yaml](https://github.com/jkeam/lab-lan-gitops/blob/main/windows10.yaml). That uses this `vms/windows` dir.
+3. Apply [https://github.com/jkeam/lab-lan-gitops/windows10.yaml](https://github.com/jkeam/lab-lan-gitops/blob/main/windows10.yaml). That uses this `vms/windows` dir.  Make sure that the `bootOrder` is set to boot from `installation-cdrom` so that Windows can install.
+
+4. After installation, edit the `bootOrder` to switch the `rootdisk` and `installation-cdrom`
 
 ### Fedora Desktop
 
