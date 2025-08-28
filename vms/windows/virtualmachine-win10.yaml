@@ -99,7 +99,7 @@ spec:
           threads: 2
         devices:
           disks:
-            - bootOrder: 1
+            - bootOrder: 2
               disk:
                 bus: sata
               name: rootdisk
@@ -107,7 +107,7 @@ spec:
               cdrom:
                 bus: sata
               name: windows-drivers-disk
-            - bootOrder: 2
+            - bootOrder: 1
               cdrom:
                 bus: sata
               name: installation-cdrom
