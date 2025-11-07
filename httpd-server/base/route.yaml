@@ -1,0 +1,25 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: httpd-server
+  labels:
+    app: httpd-server
+    app.kubernetes.io/component: httpd-server
+    app.kubernetes.io/instance: httpd-server
+    app.kubernetes.io/name: httpd-server
+    app.kubernetes.io/part-of: httpd-server
+    app.openshift.io/runtime: httpd
+    app.openshift.io/runtime-version: 2.4-ubi9
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: httpd-server-cluster-services.apps.lab.lan
+  to:
+    kind: Service
+    name: httpd-server
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+  wildcardPolicy: None
