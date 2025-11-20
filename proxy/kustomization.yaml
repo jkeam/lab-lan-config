@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: proxy
+
+configMapGenerator:
+- name: proxy-web-config
+  literals:
+  - TZ="America/New_York"
+  - DISABLE_IPV6=true
+
+secretGenerator:
+- name: proxy-web-secrets
+  literals:
+  - DB_POSTGRES_HOST=db
+  - DB_POSTGRES_PORT=5432
+  - DB_POSTGRES_USER=proxyuser
+  - DB_POSTGRES_PASSWORD=proxypassword
+  - DB_POSTGRES_NAME=proxymanager
+- name: proxy-web-db-secrets
+  literals:
+  - POSTGRESQL_USER=proxyuser
+  - POSTGRESQL_PASSWORD=proxypassword
+  - POSTGRESQL_ADMIN_PASSWORD=adminpassword
+  - POSTGRESQL_DATABASE=proxymanager
+
+resources:
+  - db-pvc.yaml
+  - db-deployment.yaml
+  - db-service.yaml
+  - app-pvc.yaml
+  - app-sa.yaml
+  - app-deployment.yaml
+  - app-service.yaml
+  - app-route.yaml

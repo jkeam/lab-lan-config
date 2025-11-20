@@ -1,0 +1,36 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: proxy-web
+  labels:
+    app: proxy-web
+spec:
+  host: proxy-web-proxy.apps.lab.lan
+  to:
+    kind: Service
+    name: proxy-web
+    weight: 100
+  port:
+    targetPort: port8080
+  tls:
+    termination: edge
+  wildcardPolicy: None
+
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: proxy-web
+  labels:
+    app: proxy-web
+spec:
+  host: proxy-web-admin-proxy.apps.lab.lan
+  to:
+    kind: Service
+    name: proxy-web
+    weight: 100
+  port:
+    targetPort: port8081
+  tls:
+    termination: edge
+  wildcardPolicy: None

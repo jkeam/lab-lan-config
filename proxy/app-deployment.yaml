@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-web
+  labels:
+    app: proxy-web
+    app.kubernetes.io/part-of: proxy
+    app.openshift.io/runtime: nginx
+    app.openshift.io/runtime-version: '2.13.5'
+    app.kubernetes.io/name: 'proxy-web'
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"Deployment","name":"db"}]'
+    app.openshift.io/vcs-uri: 'https://github.com/jkeam/lab-lan.git'
+    app.openshift.io/vcs-ref: 'main'
+spec:
+  selector:
+    matchLabels:
+      app: proxy-web
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: proxy-web
+    spec:
+      serviceAccountName: privileged-proxy-web-sa
+      containers:
+      - name: proxy-web
+        image: docker.io/jc21/nginx-proxy-manager:2.13.5
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        envFrom:
+        - configMapRef:
+            name: proxy-web-config
+        - secretRef:
+            name: proxy-web-secrets
+        ports:
+        - containerPort: 80
+          name: port8080
+        - containerPort: 80
+          name: port8081
+      restartPolicy: Always
