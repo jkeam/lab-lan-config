@@ -29,7 +29,7 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
-          env:
+          envFrom:
           - secretRef:
               name: proxy-web-db-secrets
           ports:
