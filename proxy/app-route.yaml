@@ -20,7 +20,7 @@ spec:
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: proxy-web
+  name: proxy-web-admin
   labels:
     app: proxy-web
 spec:
