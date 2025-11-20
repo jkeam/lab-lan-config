@@ -43,7 +43,7 @@ spec:
         ports:
         - containerPort: 80
           name: port8080
-        - containerPort: 80
+        - containerPort: 81
           name: port8081
         volumeMounts:
         - name: app-data
