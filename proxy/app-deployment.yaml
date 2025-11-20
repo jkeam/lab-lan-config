@@ -45,4 +45,17 @@ spec:
           name: port8080
         - containerPort: 80
           name: port8081
+        volumeMounts:
+        - name: app-data
+          mountPath: /data
+        - name: app-letsencrypt
+          mountPath: /etc/letsencrypt
       restartPolicy: Always
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: app-data
+        - name: app-letsencrypt
+          persistentVolumeClaim:
+            claimName: app-letsencrypt
+
