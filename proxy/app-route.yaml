@@ -20,6 +20,24 @@ spec:
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
+  name: proxy-web-secure
+  labels:
+    app: proxy-web
+spec:
+  host: proxy-web-proxy.apps.lab.lan
+  to:
+    kind: Service
+    name: proxy-web
+    weight: 100
+  port:
+    targetPort: port443
+  tls:
+    termination: passthrough
+
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
   name: proxy-web-admin
   labels:
     app: proxy-web
