@@ -33,6 +33,7 @@ spec:
     targetPort: port443
   tls:
     termination: passthrough
+    insecureEdgeTerminationPolicy: None
 
 ---
 kind: Route
