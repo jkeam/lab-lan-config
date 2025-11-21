@@ -24,7 +24,7 @@ metadata:
   labels:
     app: proxy-web
 spec:
-  host: proxy-web-secure.apps.lab.lan
+  host: proxy-web-secure-proxy.apps.lab.lan
   to:
     kind: Service
     name: proxy-web
