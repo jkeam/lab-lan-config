@@ -1,0 +1,36 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app-tls-cert
+  namespace: chatbot
+spec:
+  isCA: false
+  secretName: app-tls-cert-secret
+  issuerRef:
+    name: letsencrypt-digitalocean
+    kind: ClusterIssuer
+  dnsNames:
+  - keam.org
+  - '*.keam.org'
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: app-tls
+  namespace: chatbot
+  labels:
+    app: chatbot
+spec:
+  host: chatbot.keam.org
+  to:
+    kind: Service
+    name: chatbot
+    weight: 100
+  port:
+    targetPort: port8080
+  tls:
+    termination: edge
+    externalCertificate:
+      name: app-tls-cert-secret
+

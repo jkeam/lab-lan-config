@@ -155,7 +155,13 @@ oc apply -f github.com/jkeam/lab-lan-gitops/fedora.yaml.
 
 ```shell
 oc apply -f ./rbac/apps.yaml
-# oc apply -f github.com/jkeam/lab-lan-gitops/hello-go.yaml
+oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/hello-go.yaml
+```
+
+## TLS Routes
+
+```shell
+oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/tls-routes.yaml
 ```
 
 ## References
