@@ -31,7 +31,7 @@ metadata:
   namespace: openshift-console
 rules:
 - apiGroups: ["route.openshift.io"]
-  resources: ["routes"]
+  resources: ["routes", "routes/custom-host"]
   verbs: ["*"]
 ---
 
@@ -48,3 +48,31 @@ subjects:
 - kind: ServiceAccount
   name: openshift-gitops-argocd-application-controller
   namespace: openshift-gitops
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: all-certificates-role
+  namespace: openshift-console
+rules:
+- apiGroups: ["cert-manager.io"]
+  resources: ["certificates"]
+  verbs: ["*"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: all-certificates-binding
+  namespace: openshift-console
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: all-certificates-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---
+
