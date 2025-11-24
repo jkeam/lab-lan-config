@@ -109,7 +109,7 @@ metadata:
   namespace: cluster-services
 rules:
 - apiGroups: ["route.openshift.io"]
-  resources: ["routes"]
+  resources: ["routes", "routes/custom-host"]
   verbs: ["*"]
 ---
 
