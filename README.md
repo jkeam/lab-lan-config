@@ -161,6 +161,7 @@ oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/ma
 ## TLS Routes
 
 ```shell
+oc apply -f ./rbac/tls-routes.yaml
 oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/tls-routes.yaml
 ```
 
