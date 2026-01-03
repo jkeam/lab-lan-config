@@ -45,13 +45,29 @@ Set up integrated registry by doing the following.
 # test, should be nothing
 oc get pod -n openshift-image-registry -l docker-registry=default
 
+# create registry
 oc apply -f ./initial/integrated-registry-storage.yaml
-oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"managementState":"Managed"}}'
-oc patch config.imageregistry.operator.openshift.io/cluster --type=merge -p '{"spec":{"rolloutStrategy":"Recreate","replicas":1}}'
-oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"pvc":{"claim": "image-registry-storage"}}}}'
+oc patch configs.imageregistry.operator.openshift.io cluster \
+    --type merge \
+    --patch '{"spec":{"managementState":"Managed"}}'
+oc patch config.imageregistry.operator.openshift.io/cluster \
+    --type=merge \
+    -p '{"spec":{"rolloutStrategy":"Recreate","replicas":1}}'
+oc patch configs.imageregistry.operator.openshift.io cluster \
+    --type merge \
+    --patch '{"spec":{"storage":{"pvc":{"claim": "image-registry-storage"}}}}'
 
 # test again, should now be something
 oc get pod -n openshift-image-registry -l docker-registry=default
+```
+
+## Dev Hub
+
+Install Dev Hub from the Operator Hub.
+
+```shell
+# create the che cluster, pay attention to my workspace configs
+oc apply -f ./initial/che-cluster.yaml
 ```
 
 ## Virtualization
