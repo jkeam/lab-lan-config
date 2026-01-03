@@ -61,9 +61,9 @@ oc patch configs.imageregistry.operator.openshift.io cluster \
 oc get pod -n openshift-image-registry -l docker-registry=default
 ```
 
-## Dev Hub
+## Dev Spaces
 
-Install Dev Hub from the Operator Hub.
+Install Dev Spaces from the Operator Hub.
 
 ```shell
 # create the che cluster, pay attention to my workspace configs
