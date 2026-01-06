@@ -167,11 +167,22 @@ oc apply -f github.com/jkeam/lab-lan-gitops/fedora.yaml.
 
 ## Apps
 
+## Setup Helm Charts
+
+```shell
+oc apply -k ./helm-repo
+oc apply -f ./rbac/apps.yaml
+```
+
 ### Hello Go
 
 ```shell
-oc apply -f ./rbac/apps.yaml
 oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/hello-go.yaml
+```
+
+### Open WebUI
+
+```shell
 ```
 
 ## TLS Routes
