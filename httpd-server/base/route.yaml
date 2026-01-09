@@ -13,7 +13,7 @@ metadata:
   annotations:
     openshift.io/host.generated: 'true'
 spec:
-  host: httpd-server-cluster-services.apps.lab.lan
+  host: httpd-server-cluster-services.apps.lab.keam.org
   to:
     kind: Service
     name: httpd-server
