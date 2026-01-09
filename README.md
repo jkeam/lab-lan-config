@@ -186,18 +186,6 @@ oc apply -f ./rbac/apps.yaml
 oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/hello-go.yaml
 ```
 
-### Open WebUI
-
-```shell
-```
-
-## TLS Routes
-
-```shell
-oc apply -f ./rbac/tls-routes.yaml
-oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/tls-routes.yaml
-```
-
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)
