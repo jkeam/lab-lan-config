@@ -109,9 +109,12 @@ oc apply -k ./network
 
 ### Cluster Services
 
-1. Create rbac via `oc apply -f ./rbac/httpd-server.yaml`
-2. Apply github.com/jkeam/lab-lan-gitops/http-app.yaml. That uses
-this `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`.
+```shell
+oc new-project cluster-services
+oc apply -f ./rbac/httpd-server.yaml
+oc create -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/httpd-app.yaml
+  # points to `httpd-server` dir to create `httpd-server.cluster-services.svc.cluster.local`
+```
 
 ## VMs
 
