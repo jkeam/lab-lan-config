@@ -2,7 +2,7 @@ apiVersion: lvm.topolvm.io/v1alpha1
 kind: LVMCluster
 metadata:
   name: lvmcluster
-  namespace: openshift-storage
+  namespace: openshift-lvm-storage
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
     storageclass.kubevirt.io/is-default-virt-class: "true"
@@ -12,6 +12,13 @@ spec:
       - name: vg1
         fstype: ext4
         default: true
+        nodeSelector:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - master1
         deviceSelector:
           paths:
           - /dev/nvme1n1
