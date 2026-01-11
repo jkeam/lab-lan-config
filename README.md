@@ -27,8 +27,7 @@ oc get pods -n openshift-authentication -w
 
 Will use local storage via LVM.
 
-1. Install Local Storage Operator
-2. Install LVM Storage Operator (Don't create LVMCluster yet)
+1. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
 3. Create LVM Cluster
 
     ```shell
