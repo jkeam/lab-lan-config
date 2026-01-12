@@ -27,16 +27,23 @@ oc get pods -n openshift-authentication -w
 
 Will use local storage via LVM.
 
-1. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
-
-2. Create LVM Cluster
+1. Clear out drive
 
     ```shell
-    oc annotate namespace openshift-local-storage openshift.io/node-selector=''
-    oc annotate namespace openshift-local-storage workload.openshift.io/allowed='management'
-    # You might need to set up the disk and might want to use the sgdisk tool
-    #   from the `parted` package
-    # oc debug node/master1 -- sgdisk --zap-all /dev/nvme1n1
+    oc debug $NODE_NAME
+    chroot /host
+    wipefs -af /dev/nvme1n1
+    sgdisk --zap-all /dev/nvme1n1
+    dd if=/dev/zero of=/dev/nvme1n1 bs=1M count=100 oflag=direct,dsync
+    # might have to reboot to run the following:
+    blkdiscard /dev/nvme1n1
+    ```
+
+2. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
+
+3. Create LVM Cluster
+
+    ```shell
     oc apply -f ./initial/lvmcluster.yaml
     ```
 
