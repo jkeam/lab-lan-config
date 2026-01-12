@@ -28,7 +28,8 @@ oc get pods -n openshift-authentication -w
 Will use local storage via LVM.
 
 1. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
-3. Create LVM Cluster
+
+2. Create LVM Cluster
 
     ```shell
     oc annotate namespace openshift-local-storage openshift.io/node-selector=''
@@ -120,6 +121,7 @@ oc create -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/m
 ### Windows
 
 1. Download Windows ISO
+
 2. Upload ISO
 
     ```shell
