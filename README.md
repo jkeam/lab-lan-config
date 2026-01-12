@@ -47,6 +47,13 @@ Will use local storage via LVM.
     oc apply -f ./initial/lvmcluster.yaml
     ```
 
+4. Add annotation
+
+    ```shell
+    oc patch storageclass lvms-vg1 --type='merge' \
+        -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
+    ```
+
 ## Integrated Registry
 
 Set up integrated registry by doing the following.
