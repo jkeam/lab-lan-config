@@ -65,17 +65,24 @@ oc get pod -n openshift-image-registry -l docker-registry=default
 # create registry
 oc apply -f ./initial/integrated-registry-storage.yaml
 oc patch configs.imageregistry.operator.openshift.io cluster \
-    --type merge \
+    --type=merge \
     --patch '{"spec":{"managementState":"Managed"}}'
 oc patch config.imageregistry.operator.openshift.io/cluster \
     --type=merge \
     -p '{"spec":{"rolloutStrategy":"Recreate","replicas":1}}'
 oc patch configs.imageregistry.operator.openshift.io cluster \
-    --type merge \
+    --type=merge \
     --patch '{"spec":{"storage":{"pvc":{"claim": "image-registry-storage"}}}}'
+oc patch configs.imageregistry.operator.openshift.io/cluster \
+    --type=merge \
+    --patch '{"spec":{"defaultRoute":true}}'
 
 # test again, should now be something
 oc get pod -n openshift-image-registry -l docker-registry=default
+
+# get the route
+oc get route default-route -n openshift-image-registry \
+    --template='{{ .spec.host }}'
 ```
 
 ## Dev Spaces
