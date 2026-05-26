@@ -167,6 +167,7 @@ This is using a live disk.
     ISO_FILE=$HOME/Downloads/Fedora-LXDE-Live-x86_64-42-1.1.iso  # or wherever
     POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
     oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
+    oc cp ./httpd-server/.htaccess $POD_NAME:/opt/app-root/src -n cluster-services
     oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
     ```
 

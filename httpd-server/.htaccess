@@ -1,0 +1,11 @@
+# Turn on folder contents listing
+Options +Indexes
+
+# Block people from seeing private files
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Send visitors to a custom error page
+# ErrorDocument 404 /not-found.html
