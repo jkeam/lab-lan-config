@@ -30,13 +30,13 @@ Will use local storage via LVM.
 1. Clear out drive
 
     ```shell
-    oc debug $NODE_NAME
+    oc debug node/$NODE_NAME
     chroot /host
-    wipefs -af /dev/nvme1n1
-    sgdisk --zap-all /dev/nvme1n1
-    dd if=/dev/zero of=/dev/nvme1n1 bs=1M count=100 oflag=direct,dsync
+    wipefs -af /dev/nvme0n1
+    sgdisk --zap-all /dev/nvme0n1
+    dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=100 oflag=direct,dsync
     # might have to reboot to run the following:
-    blkdiscard /dev/nvme1n1
+    blkdiscard /dev/nvme0n1
     ```
 
 2. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
