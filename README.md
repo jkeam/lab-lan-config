@@ -25,32 +25,65 @@ oc get pods -n openshift-authentication -w
 
 ## Storage
 
-Will use local storage via LVM.
+Make sure drive is clear. Using `nvme0n1` as an example:
 
-1. Clear out drive
+```shell
+oc debug node/$NODE_NAME
+chroot /host
+wipefs -af /dev/nvme0n1
+sgdisk --zap-all /dev/nvme0n1
+dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=100 oflag=direct,dsync
+# might have to reboot to run the following:
+blkdiscard /dev/nvme0n1
+```
 
-    ```shell
-    oc debug node/$NODE_NAME
-    chroot /host
-    wipefs -af /dev/nvme0n1
-    sgdisk --zap-all /dev/nvme0n1
-    dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=100 oflag=direct,dsync
-    # might have to reboot to run the following:
-    blkdiscard /dev/nvme0n1
-    ```
+### LVM
 
-2. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
+This uses the Logical Volume Manager.
 
-3. Create LVM Cluster
+1. Install LVM Storage Operator (Don't create LVMCluster yet, we do that next)
+
+2. Create LVM Cluster
 
     ```shell
     oc apply -f ./initial/lvmcluster.yaml
     ```
 
-4. Add annotation
+3. Add annotation
 
     ```shell
     oc patch storageclass lvms-vg1 --type='merge' \
+        -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
+    ```
+
+### LSO
+
+This uses the Local Storage Operator.
+
+1. Setup namespace
+
+    ```shell
+    oc adm new-project openshift-local-storage
+    # allow to run on infra nodes
+    oc annotate namespace openshift-local-storage openshift.io/node-selector=''
+    # allow to run on a SNO
+    oc annotate namespace openshift-local-storage workload.openshift.io/allowed='management'
+    ```
+
+2. Install Local Storage Operator, specifically into `openshift-local-storage` namespace
+
+3. Create `LocalVolume`
+
+    ```shell
+    oc apply -f ./initial/localvolume.yaml
+    ```
+
+4. Add annotation
+
+    ```shell
+    oc patch storageclass local-sc --type='merge' \
+        -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+    oc patch storageclass local-sc --type='merge' \
         -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
     ```
 
