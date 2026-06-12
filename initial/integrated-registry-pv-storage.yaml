@@ -40,3 +40,4 @@ spec:
     requests:
       storage: 100Gi
   volumeMode: Block
+  storageClassName: local-storage
