@@ -2,7 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: httpd-data-pvc
-  namespace: httpd-server
+  namespace: cluster-services
 spec:
   accessModes:
     - ReadWriteOnce
