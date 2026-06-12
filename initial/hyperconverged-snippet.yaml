@@ -1,0 +1,144 @@
+dataImportCronTemplates:
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        ssp.kubevirt.io/dict.architectures: 'amd64'
+        dataimportcrontemplate.kubevirt.io/enable: 'false'
+      labels:
+        kubevirt.io/dynamic-credentials-support: 'true'
+      name: centos-stream10-image-cron
+    spec:
+      importsToKeep: 1
+      garbageCollect: Outdated
+      managedDataSource: centos-stream10
+      schedule: 38 2/12 * * *
+      template:
+        metadata: {}
+        spec:
+          source:
+            registry:
+              pullMethod: node
+              url: 'docker://quay.io/containerdisks/centos-stream:10'
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        ssp.kubevirt.io/dict.architectures: 'amd64'
+        dataimportcrontemplate.kubevirt.io/enable: 'false'
+      labels:
+        kubevirt.io/dynamic-credentials-support: 'true'
+      name: centos-stream9-image-cron
+    spec:
+      importsToKeep: 1
+      garbageCollect: Outdated
+      managedDataSource: centos-stream9
+      schedule: 38 2/12 * * *
+      template:
+        metadata: {}
+        spec:
+          source:
+            registry:
+              pullMethod: node
+              url: 'docker://quay.io/containerdisks/centos-stream:9'
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        ssp.kubevirt.io/dict.architectures: 'amd64'
+        dataimportcrontemplate.kubevirt.io/enable: 'true'
+      labels:
+        kubevirt.io/dynamic-credentials-support: 'true'
+      name: fedora-image-cron
+    spec:
+      importsToKeep: 1
+      garbageCollect: Outdated
+      managedDataSource: fedora
+      schedule: 38 2/12 * * *
+      template:
+        metadata: {}
+        spec:
+          source:
+            registry:
+              pullMethod: node
+              url: 'docker://quay.io/containerdisks/fedora:latest'
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        ssp.kubevirt.io/dict.architectures: 'amd64'
+        dataimportcrontemplate.kubevirt.io/enable: 'false'
+      labels:
+        kubevirt.io/dynamic-credentials-support: 'true'
+      name: rhel10-image-cron
+    spec:
+      importsToKeep: 1
+      garbageCollect: Outdated
+      managedDataSource: rhel10
+      schedule: 38 2/12 * * *
+      template:
+        metadata: {}
+        spec:
+          source:
+            registry:
+              imageStream: rhel10-guest
+              pullMethod: node
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        ssp.kubevirt.io/dict.architectures: 'amd64'
+        dataimportcrontemplate.kubevirt.io/enable: 'false'
+      name: rhel8-image-cron
+    spec:
+      importsToKeep: 1
+      garbageCollect: Outdated
+      managedDataSource: rhel8
+      schedule: 38 2/12 * * *
+      template:
+        metadata: {}
+        spec:
+          source:
+            registry:
+              imageStream: rhel8-guest
+              pullMethod: node
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+  - metadata:
+      annotations:
+        cdi.kubevirt.io/storage.bind.immediate.requested: 'true'
+        ssp.kubevirt.io/dict.architectures: 'amd64'
+        dataimportcrontemplate.kubevirt.io/enable: 'false'
+      labels:
+        kubevirt.io/dynamic-credentials-support: 'true'
+      name: rhel9-image-cron
+    spec:
+      importsToKeep: 1
+      garbageCollect: Outdated
+      managedDataSource: rhel9
+      schedule: 38 2/12 * * *
+      template:
+        metadata: {}
+        spec:
+          source:
+            registry:
+              imageStream: rhel9-guest
+              pullMethod: node
+          storage:
+            resources:
+              requests:
+                storage: 30Gi
+

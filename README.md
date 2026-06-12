@@ -141,8 +141,11 @@ oc apply -f ./initial/che-cluster.yaml
 
 ## Virtualization
 
-Install OpenShift Virtualization operator and create `HyperConvered` object
+Install OpenShift Virtualization operator and create `HyperConverged` object
 using all defaults.
+
+Optionally, configure `dataImportCronTemplates` using `./initial/hyperconverged-snippet.yaml`
+and putting that in `HyperConverged.spec.dataImportCronTemplates`.
 
 Also create the project where all VMs and configs will live and
 create the right RBAC.
