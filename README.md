@@ -87,6 +87,15 @@ This uses the Local Storage Operator.
         -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
     ```
 
+### Custom Local
+
+This uses all standard Kube components.
+
+```shell
+# create storage class
+oc apply -f ./initial/local-storage-class.yaml
+```
+
 ## Integrated Registry
 
 Set up integrated registry by doing the following.
@@ -96,7 +105,10 @@ Set up integrated registry by doing the following.
 oc get pod -n openshift-image-registry -l docker-registry=default
 
 # create registry
-oc apply -f ./initial/integrated-registry-storage.yaml
+oc apply -f ./initial/integrated-registry-storage.yaml  # if using LVM or LSO
+# oc apply -f ./initial/integrated-registry-pv-storage.yaml  # if standard kube components
+
+# patch object
 oc patch configs.imageregistry.operator.openshift.io cluster \
     --type=merge \
     --patch '{"spec":{"managementState":"Managed"}}'
