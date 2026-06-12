@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: cluster-services
 resources:
   - ../../base
+  - pv.yaml
   - pvc.yaml
   - httpd-deployment.yaml
