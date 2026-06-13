@@ -87,15 +87,6 @@ This uses the Local Storage Operator.
         -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
     ```
 
-### Custom Local
-
-This uses all standard Kube components.
-
-```shell
-# create storage class
-oc apply -f ./initial/local-storage-class.yaml
-```
-
 ## Integrated Registry
 
 Set up integrated registry by doing the following.
