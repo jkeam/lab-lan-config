@@ -92,7 +92,7 @@ spec:
         - name: default
           pod: {}
         - multus:
-            networkName: br-ex-network
+            networkName: physnet-vmdata
           name: bridge
       terminationGracePeriodSeconds: 180
       volumes:

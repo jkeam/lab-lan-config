@@ -69,7 +69,7 @@ spec:
           resources:
             requests:
               storage: 20Gi
-  running: true
+  runStrategy: RerunOnFailure
   template:
     metadata:
       annotations:
@@ -160,7 +160,7 @@ spec:
           pod: {}
         - name: bridge
           multus:
-            networkName: br-ex-network
+            networkName: physnet-vmdata
       terminationGracePeriodSeconds: 3600
       volumes:
         - dataVolume:

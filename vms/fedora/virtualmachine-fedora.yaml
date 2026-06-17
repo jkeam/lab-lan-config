@@ -1,24 +1,13 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  annotations:
-    vm.kubevirt.io/validations: |
-      [
-        {
-          "name": "minimal-required-memory",
-          "path": "jsonpath::.spec.domain.memory.guest",
-          "rule": "integer",
-          "message": "This VM requires more memory.",
-          "min": 2147483648
-        }
-      ]
   labels:
     app: fedora
     kubevirt.io/dynamic-credentials-support: 'true'
     vm.kubevirt.io/template: fedora-server-small
     vm.kubevirt.io/template.namespace: openshift
     vm.kubevirt.io/template.revision: '1'
-    vm.kubevirt.io/template.version: v0.29.1
+    vm.kubevirt.io/template.version: v0.34.1
   name: fedora
 spec:
   dataVolumeTemplates:
@@ -35,7 +24,7 @@ spec:
           resources:
             requests:
               storage: 40Gi
-  running: true
+  runStrategy: RerunOnFailure
   template:
     metadata:
       annotations:
@@ -94,7 +83,7 @@ spec:
           pod: {}
         - name: bridge
           multus:
-            networkName: br-ex-network
+            networkName: physnet-vmdata
       terminationGracePeriodSeconds: 180
       volumes:
         - name: rootdisk
