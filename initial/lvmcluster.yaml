@@ -19,9 +19,10 @@ spec:
               operator: In
               values:
               - master1
+              - workerbee1
         deviceSelector:
           paths:
-          - /dev/nvme1n1
+          - /dev/nvme0n1
           forceWipeDevicesAndDestroyAllData: true
         thinPoolConfig:
           chunkSizeCalculationPolicy: Static
