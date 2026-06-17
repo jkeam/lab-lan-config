@@ -84,6 +84,8 @@ spec:
         - name: bridge
           multus:
             networkName: physnet-vmdata
+      nodeSelector:
+        kubernetes.io/hostname: workerbee1
       terminationGracePeriodSeconds: 180
       volumes:
         - name: rootdisk
