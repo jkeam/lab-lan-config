@@ -167,6 +167,9 @@ Install the NMState operator and NMState operand.
 oc apply -k ./network
 ```
 
+Note: Leaving `./network/nad.yaml` for reference only, but the `./network/cudn.yaml`
+will create this for us.
+
 ### Cluster Services
 
 ```shell

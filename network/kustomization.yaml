@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: vms
 resources:
   - nncp.yaml
-  - nad.yaml
+  - udn.yaml

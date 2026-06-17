@@ -1,11 +1,13 @@
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: br-ex-network
+  name: ovs-bridge-mapping-physnet-vmdata
 spec:
+  nodeSelector:
+    kubernetes.io/hostname: workerbee1
   desiredState:
     ovn:
       bridge-mappings:
-      - localnet: br-ex-network
+      - localnet: physnet-vmdata
         bridge: br-ex 
         state: present
