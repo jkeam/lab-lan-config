@@ -13,4 +13,5 @@ spec:
       physicalNetworkName: physnet-vmdata
       subnets:
         - "192.168.1.0/24"
-
+      ipam:
+        mode: Disabled
