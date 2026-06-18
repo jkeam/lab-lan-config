@@ -96,8 +96,7 @@ Set up integrated registry by doing the following.
 oc get pod -n openshift-image-registry -l docker-registry=default
 
 # create registry
-oc apply -f ./initial/integrated-registry-storage.yaml  # if using LVM or LSO
-# oc apply -f ./initial/integrated-registry-pv-storage.yaml  # if standard kube components
+oc apply -f ./initial/integrated-registry-storage.yaml
 
 # patch object
 oc patch configs.imageregistry.operator.openshift.io cluster \
