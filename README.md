@@ -180,6 +180,12 @@ oc create -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/m
 
 ## VMs
 
+Create `images` directory.
+
+```shell
+oc exec $(oc get pods -l app=httpd-server -n cluster-services -o name) -n cluster-services -- mkdir ./images
+```
+
 ### Windows
 
 1. Download Windows ISO
@@ -190,7 +196,7 @@ oc create -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/m
     ISO_FILE=$HOME/Downloads/Win10_22H2_English_x64v1.iso  # or wherever it is
     POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
     oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
-    oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
+    oc cp $ISO_FILE $POD_NAME:/opt/app-root/src/images -n cluster-services
     ```
 
 3. Apply [https://github.com/jkeam/lab-lan-gitops/windows10.yaml](https://github.com/jkeam/lab-lan-gitops/blob/main/windows10.yaml). That uses this `vms/windows` dir.  Make sure that the `bootOrder` is set to boot from `installation-cdrom` so that Windows can install.
@@ -209,7 +215,7 @@ This is using a live disk.
     POD_NAME=$(oc get pods --selector=app=httpd-server -o jsonpath='{.items[0].metadata.name}' -n cluster-services)
     oc cp ./httpd-server/index.html $POD_NAME:/opt/app-root/src -n cluster-services
     oc cp ./httpd-server/.htaccess $POD_NAME:/opt/app-root/src -n cluster-services
-    oc cp $ISO_FILE $POD_NAME:/opt/app-root/src -n cluster-services
+    oc cp $ISO_FILE $POD_NAME:/opt/app-root/src/images -n cluster-services
     ```
 
 3. Log in and install the OS
