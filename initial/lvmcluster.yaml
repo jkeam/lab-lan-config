@@ -21,8 +21,9 @@ spec:
               - master1
               - workerbee1
         deviceSelector:
-          paths:
-          - /dev/nvme0n1
+          optionalPaths:
+          - /dev/disk/by-id/nvme-KINGSTON_SNV2S2000G_50026B7686A14EA2
+          - /dev/disk/by-id/nvme-512GB_SSD_MQ25W03121871
           forceWipeDevicesAndDestroyAllData: true
         thinPoolConfig:
           chunkSizeCalculationPolicy: Static
