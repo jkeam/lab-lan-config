@@ -56,6 +56,14 @@ This uses the Logical Volume Manager.
         -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
     ```
 
+4. Some Helpful Commands
+
+    ```shell
+    lsblk                   # list all devices
+    findmnt /sysroot        # find which device is the boot device
+    ls -l /dev/disk/by-id/  # find the id which is a better way to id the device
+    ```
+
 ### LSO
 
 This uses the Local Storage Operator.
