@@ -7,7 +7,7 @@ metadata:
     vm.kubevirt.io/template: fedora-server-small
     vm.kubevirt.io/template.namespace: openshift
     vm.kubevirt.io/template.revision: '1'
-    vm.kubevirt.io/template.version: v0.34.1
+    vm.kubevirt.io/template.version: v0.35.0
   name: fedora
 spec:
   dataVolumeTemplates:
@@ -28,6 +28,7 @@ spec:
   template:
     metadata:
       annotations:
+        kubevirt.io/pci-topology-version: v3
         vm.kubevirt.io/flavor: small
         vm.kubevirt.io/os: fedora
         vm.kubevirt.io/workload: server
@@ -74,7 +75,7 @@ spec:
           bootloader:
             bios: {}
         machine:
-          type: pc-q35-rhel9.4.0
+          type: pc-q35-rhel9.8.0
         memory:
           guest: 4Gi
         resources: {}
