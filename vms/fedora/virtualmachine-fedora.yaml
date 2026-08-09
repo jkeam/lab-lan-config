@@ -36,6 +36,7 @@ spec:
         kubevirt.io/domain: fedora
         kubevirt.io/size: small
     spec:
+      evictionStrategy: None
       accessCredentials:
         - sshPublicKey:
             propagationMethod:
