@@ -1,0 +1,11 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: claw-operator
+  namespace: claw-operator
+spec:
+  channel: staging
+  name: claw-operator
+  source: claw-operator-catalog
+  sourceNamespace: openshift-marketplace
+  installPlanApproval: Automatic

@@ -264,6 +264,19 @@ oc apply -f ./rbac/apps.yaml
 oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/hello-go.yaml
 ```
 
+## OpenClaw
+
+```shell
+oc apply -k openshell
+```
+
+Then wait for CSV status to become `Succeeded` and for pods to come up.
+
+```shell
+oc get csv -n claw-operator
+oc get pods -n claw-operator
+```
+
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)

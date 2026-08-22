@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: claw-operator
+  labels:
+    name: claw-operator
+  annotations:
+    openshift.io/description: Namespace where OpenClaw Operator runs
+    openshift.io/display-name: Claw Operator

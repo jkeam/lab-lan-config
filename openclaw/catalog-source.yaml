@@ -1,0 +1,13 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: claw-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  sourceType: grpc
+  image: quay.io/codeready-toolchain/claw-operator-catalog:latest
+  displayName: Claw Operator
+  publisher: Red Hat
+  updateStrategy:
+    registryPoll:
+      interval: 15m
