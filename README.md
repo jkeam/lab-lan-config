@@ -279,6 +279,25 @@ oc get csv -n claw-operator
 oc get pods -n claw-operator
 ```
 
+## Git
+
+```shell
+oc new-project forgejo
+helm install forgejo oci://code.forgejo.org/forgejo-helm/forgejo \
+  --set image.registry=codeberg.org \
+  --set image.repository=forgejo/forgejo \
+  --set image.tag=16 \
+  --set image.rootless=true \
+  --set clusterDomain=lab.keam.org \
+  --set route.enabled=true \
+  --set serviceAccount.create=true \
+  --set gitea.admin.username=forgejo_admin \
+  --set gitea.admin.password=qGmgz9U8PpTDm9Cyo5nBbvA5b70 \
+  --set gitea.admin.email=jpkeam@gmail.com \
+  --set podSecurityContext.fsGroup=1000990000 \
+  --set global.compatibility.openshift.adaptSecurityContext=force
+```
+
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)
