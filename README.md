@@ -267,7 +267,9 @@ oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/ma
 ## OpenClaw
 
 ```shell
-oc apply -k openshell
+oc apply -k openclaw
+
+# for openshell, go here: https://gist.github.com/jkeam/cfb7899f0f360d7efe502cebc838a2fb
 ```
 
 Then wait for CSV status to become `Succeeded` and for pods to come up.
