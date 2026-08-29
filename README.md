@@ -298,6 +298,24 @@ helm install forgejo oci://code.forgejo.org/forgejo-helm/forgejo \
   --set global.compatibility.openshift.adaptSecurityContext=force
 ```
 
+## S3
+
+```shell
+oc new-project s3
+helm upgrade --install rustfs rustfs --repo https://charts.rustfs.com --version 0.0.85 \
+  --set 'podSecurityContext.fsGroup=null' \
+  --set 'podSecurityContext.runAsUser=null' \
+  --set 'podSecurityContext.runAsGroup=null' \
+  --set 'containerSecurityContext.readOnlyRootFilesystem=null' \
+  --set 'containerSecurityContext.allowPrivilegeEscalation=null' \
+  --set 'containerSecurityContext.runAsNonRoot=null' \
+  --set image.rustfs.tag=1.0.0-alpha.85 \
+  --set ingress.enabled=false \
+  --set mode.standalone.enabled=true \
+  --set mode.distributed.enabled=false \
+  --set storageclass.name=lvms-vg1
+```
+
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)
