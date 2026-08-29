@@ -314,6 +314,8 @@ helm upgrade --install rustfs rustfs --repo https://charts.rustfs.com --version 
   --set mode.standalone.enabled=true \
   --set mode.distributed.enabled=false \
   --set storageclass.name=lvms-vg1
+oc create route edge rustfs --service=rustfs-svc --port=9000 --insecure-policy=Redirect
+oc create route edge rustfs-console --service=rustfs-svc --port=9001 --insecure-policy=Redirect
 ```
 
 ## References
