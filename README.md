@@ -313,9 +313,18 @@ helm upgrade --install rustfs rustfs --repo https://charts.rustfs.com --version 
   --set ingress.enabled=false \
   --set mode.standalone.enabled=true \
   --set mode.distributed.enabled=false \
-  --set storageclass.name=lvms-vg1
+  --set storageclass.name=lvms-vg1 \
+  --set storageclass.dataStorageSize=10Gi \
+  --set storageclass.logStorageSize=1Gi
 oc create route edge rustfs --service=rustfs-svc --port=9000 --insecure-policy=Redirect
 oc create route edge rustfs-console --service=rustfs-svc --port=9001 --insecure-policy=Redirect
+```
+
+If you need to resize after the fact:
+
+```shell
+oc patch pvc rustfs-data -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
+oc patch pvc rustfs-logs -p '{"spec": {"resources": {"requests": {"storage": "1Gi"}}}}'
 ```
 
 ## References
