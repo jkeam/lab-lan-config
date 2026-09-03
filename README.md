@@ -295,7 +295,9 @@ helm install forgejo oci://code.forgejo.org/forgejo-helm/forgejo \
   --set gitea.admin.password=qGmgz9U8PpTDm9Cyo5nBbvA5b70 \
   --set gitea.admin.email=jpkeam@gmail.com \
   --set podSecurityContext.fsGroup=1000990000 \
-  --set global.compatibility.openshift.adaptSecurityContext=force
+  --set global.compatibility.openshift.adaptSecurityContext=force \
+  --set deploymentLabels.app\.openshift\.io/runtime=golang
+oc apply -f ./git/console-link.yaml
 ```
 
 ## S3
@@ -315,9 +317,11 @@ helm upgrade --install rustfs rustfs --repo https://charts.rustfs.com --version 
   --set mode.distributed.enabled=false \
   --set storageclass.name=lvms-vg1 \
   --set storageclass.dataStorageSize=10Gi \
-  --set storageclass.logStorageSize=1Gi
+  --set storageclass.logStorageSize=1Gi \
+  --set deploymentLabels.app\.openshift\.io/runtime=rust
 oc create route edge rustfs --service=rustfs-svc --port=9000 --insecure-policy=Redirect
 oc create route edge rustfs-console --service=rustfs-svc --port=9001 --insecure-policy=Redirect
+oc apply -f ./s3/console-link.yaml
 ```
 
 If you need to resize after the fact:
