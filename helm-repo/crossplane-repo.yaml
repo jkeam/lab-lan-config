@@ -1,0 +1,8 @@
+apiVersion: helm.openshift.io/v1beta1
+kind: HelmChartRepository
+metadata:
+  name: 'crossplane'
+spec:
+  connectionConfig:
+    url: 'https://charts.crossplane.io/stable'
+  name: Crossplane Helm Charts

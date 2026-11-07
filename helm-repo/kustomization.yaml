@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - keamchart-repo.yaml
   - openwebui-repo.yaml
+  - crossplane-repo.yaml

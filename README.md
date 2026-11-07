@@ -264,6 +264,12 @@ oc apply -f ./rbac/apps.yaml
 oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/hello-go.yaml
 ```
 
+### Crossplane
+
+```shell
+oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/crossplane.yaml
+```
+
 ## OpenClaw
 
 ```shell
