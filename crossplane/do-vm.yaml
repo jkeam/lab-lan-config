@@ -1,0 +1,18 @@
+apiVersion: droplet.digitalocean.crossplane.io/v1alpha1
+kind: Droplet
+metadata:
+  name: do-fedora
+spec:
+  forProvider:
+    name: do-fedora
+    region: nyc3
+    size: s-1vcpu-1gb
+    image: fedora-44-x64
+    sshKeys:
+      - "60709773"
+      - "57300636"
+    tags:
+      - crossplane
+    userData:
+  providerConfigRef:
+    name: default

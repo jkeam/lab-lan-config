@@ -1,0 +1,11 @@
+apiVersion: project.digitalocean.crossplane.io/v1alpha1
+kind: Resources
+metadata:
+  name: do-vm-project-resources
+spec:
+  forProvider:
+    project: "<project id>"
+    resources:
+      - "do:droplet:<droplet-id>"
+  providerConfigRef:
+    name: default

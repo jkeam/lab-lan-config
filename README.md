@@ -264,12 +264,6 @@ oc apply -f ./rbac/apps.yaml
 oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/hello-go.yaml
 ```
 
-### Crossplane
-
-```shell
-oc apply -f https://raw.githubusercontent.com/jkeam/lab-lan-gitops/refs/heads/main/crossplane.yaml
-```
-
 ## OpenClaw
 
 ```shell
@@ -334,6 +328,27 @@ If you need to resize after the fact:
 ```shell
 oc patch pvc rustfs-data -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 oc patch pvc rustfs-logs -p '{"spec": {"resources": {"requests": {"storage": "1Gi"}}}}'
+```
+
+## Crossplane
+
+```shell
+oc create secret generic do-creds -n crossplane-system --from-literal=credentials='{"token":"dop_v1_replaceme"}'
+oc create -f ./crossplane/crossplane.yaml # wait for everything to install in crossplane-system project
+# create crossplane config
+oc create -f ./crossplane/crossplane-config.yaml
+# create crossplane objects
+oc create -f ./crossplane/do-vm.yaml
+
+# rest is optional to put it into the project
+#  optional bc can do it via the cli or through the UI
+#  or by default will get put into the first project, so this might be right already
+# get project id
+doctl projects list
+# then get the vm id
+oc get droplet.droplet.digitalocean.crossplane.io demo-droplet -o jsonpath='{.status.atProvider.id}'
+# put those ids into ./crossplane/do-vm-resource.yaml and then create it
+oc create -f ./crossplane/do-vm-resource.yaml
 ```
 
 ## References
