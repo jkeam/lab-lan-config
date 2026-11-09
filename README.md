@@ -56,7 +56,16 @@ This uses the Logical Volume Manager.
         -p '{"metadata":{"annotations":{"storageclass.kubevirt.io/is-default-virt-class":"true"}}}'
     ```
 
-4. Some Helpful Commands
+4. Add clone strategy
+
+    ```shell
+    # changes the clone strategy from copy to snapshot
+    oc patch storageprofile lvms-vg1 --type merge -p '{"spec":{"cloneStrategy":"snapshot"}}'
+    # and to undo this
+    # oc patch storageprofile lvms-vg1 --type json -p '[{"op":"remove","path":"/spec/cloneStrategy"}]'
+    ```
+
+5. Some Helpful Commands
 
     ```shell
     lsblk                   # list all devices
