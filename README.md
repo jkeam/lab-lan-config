@@ -360,6 +360,14 @@ oc get droplet.droplet.digitalocean.crossplane.io demo-droplet -o jsonpath='{.st
 oc create -f ./crossplane/do-vm-resource.yaml
 ```
 
+## Etcd
+
+Create a cronjob that runs weekly to defrag etcd.
+
+```shell
+oc apply -f ./etcd/defrag-cron.yaml
+```
+
 ## References
 
 1. [Cloud init secret](https://access.redhat.com/solutions/7090471)
